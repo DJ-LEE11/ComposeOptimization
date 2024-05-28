@@ -1,14 +1,14 @@
 package com.example.composeoptimization.compose
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 
 /**
  * Author: lidongjie
@@ -19,15 +19,15 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun DerivedStatePage() {
-    Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        Text(
-            text = "DerivedStatePage",
-        )
+    var clickCount by remember { mutableStateOf(0) }
+    val clickedALot by remember { derivedStateOf { clickCount >= 5 } }
+    Column {
+        Button(onClick = { clickCount++ }) {
+            Text(text = "Click me")
+        }
+
+        if (clickedALot) {
+            Text(text = "You clicked a lot")
+        }
     }
 }
