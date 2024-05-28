@@ -33,7 +33,7 @@ fun DeferReadingStatePage() {
     val offset by offsetAnimate()
     Box(modifier = Modifier.fillMaxSize()) {
         NiceGridUI()
-        ImageAnimLambda({ offset })
+        ImageAnimDefer({ offset })
     }
 }
 
@@ -64,6 +64,9 @@ private fun offsetAnimate(): State<IntOffset> = rememberInfiniteTransition().ani
     ), label = ""
 )
 
+/**
+ * 推迟阅读状态优化
+ */
 @Composable
 private fun ImageAnimDefer(offset: () -> IntOffset) {
     Image(
@@ -74,6 +77,9 @@ private fun ImageAnimDefer(offset: () -> IntOffset) {
     )
 }
 
+/**
+ * lambda修饰符优化
+ */
 @Composable
 private fun ImageAnimLambda(offset: () -> IntOffset) {
     Image(painter = painterResource(id = R.drawable.compose_logo), contentDescription = "logo",
