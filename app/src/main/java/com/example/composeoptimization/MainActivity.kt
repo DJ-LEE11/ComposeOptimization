@@ -40,22 +40,19 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun App(
-    navController: NavHostController = rememberNavController()
-) {
+fun App() {
     Scaffold { innerPadding ->
         Column(
             modifier = Modifier.padding(innerPadding)
         ) {
-            AppNavHost(navController)
+            AppNavHost()
         }
     }
 }
 
 @Composable
-private fun AppNavHost(
-    navController: NavHostController,
-) {
+private fun AppNavHost() {
+    val navController: NavHostController = rememberNavController()
     NavHost(
         navController = navController,
         startDestination = Page.Home.name,
