@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
  * Author: lidongjie
  * Date: 2024/5/28
  * SinceVer: 1.0.0
- * Desc: DerivedState
+ * Desc: 衍生状态优化
  */
 
 @Composable

@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
  * Author: lidongjie
  * Date: 2024/5/28
  * SinceVer: 1.0.0
- * Desc: Defer Reading State
+ * Desc: 推迟阅读状态&Lambda优化
  */
 
 @Composable
