@@ -55,4 +55,9 @@ sealed interface Page {
     }
 }
 
-val PageList = listOf(Page.DeferReadingState, Page.Stability, Page.DerivedState, Page.List)
+val PageList = listOf(
+    Page.DeferReadingState,
+    Page.Stability,
+    Page.DerivedState,
+    Page.List,
+)
