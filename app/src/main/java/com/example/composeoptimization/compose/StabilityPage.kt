@@ -24,51 +24,35 @@ import kotlinx.collections.immutable.toImmutableList
 
 @Composable
 fun StabilityPage() {
-    val contact1 by remember { mutableStateOf(Contact("112", "222")) }
+    val contact by remember { mutableStateOf(Contact("qqqq", "111")) }
     var selected by remember { mutableStateOf(false) }
 
-    var contactList1 by remember {
-        mutableStateOf(
-            listOf(Contact("aaa", "222"), Contact("bbb", "222"))
-        )
+    var contactList by remember {
+        mutableStateOf(listOf(Contact("aaa", "111"), Contact("bbb", "222")))
     }
     Column {
         Checkbox(checked = selected, {
-//            contactList1 = listOf(
-//                Contact("aaa", "222"), Contact("bbb", "222"), Contact("ccc", "333")
-//            )
             selected = it
         })
+//        ContactLayout(contact)
         Text(text = "点击我", Modifier.noClickShadowModifier {
-            contactList1 = listOf(
-                Contact("aaa", "222"), Contact("bbb", "222"), Contact("ccc", "333"), Contact(
-                    "ddd",
-                    "333"
-                )
-            )
+            contactList = listOf(Contact("aaa", "111"), Contact("bbb", "222"), Contact("ccc", "333"))
         })
-//        ContactInfo({ contact1 })
-//        ContactInfoList({ contactList1 })
-        ContactInfoList1(contactList1.toImmutableList())
+//        ContactList(contactList)
+//        ContactListLambdaLayout({ contactList })
+        ContactImmutableList(contactList.toImmutableList())
     }
 }
 
+class Contact(val name: String, val phone: String)
+
 @Composable
-fun ContactInfo(info: () -> Contact) {
-    Text(text = "${info().name} ${info().phone}")
+fun ContactLayout(info: Contact) {
+    Text(text = "${info.name} , ${info.phone}")
 }
 
 @Composable
-fun ContactInfoList(infos: () -> List<Contact>) {
-    LazyColumn {
-        this.items(items = infos(), key = { item -> item.name }) {
-            Text(text = "${it.name} ${it.phone}")
-        }
-    }
-}
-
-@Composable
-fun ContactInfoList1(infos: ImmutableList<Contact>) {
+fun ContactList(infos: List<Contact>) {
     LazyColumn {
         this.items(items = infos, key = { item -> item.name }) {
             Text(text = "${it.name} ${it.phone}")
@@ -76,4 +60,20 @@ fun ContactInfoList1(infos: ImmutableList<Contact>) {
     }
 }
 
-class Contact(val name: String, val phone: String)
+@Composable
+fun ContactImmutableList(infos: ImmutableList<Contact>) {
+    LazyColumn {
+        this.items(items = infos, key = { item -> item.name }) {
+            Text(text = "${it.name} ${it.phone}")
+        }
+    }
+}
+
+@Composable
+fun ContactListLambdaLayout(infos: () -> List<Contact>) {
+    LazyColumn {
+        this.items(items = infos(), key = { item -> item.name }) {
+            Text(text = "${it.name} , ${it.phone}")
+        }
+    }
+}
