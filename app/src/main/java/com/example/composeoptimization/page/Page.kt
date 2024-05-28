@@ -6,6 +6,7 @@ import com.example.composeoptimization.compose.DeferReadingStatePage
 import com.example.composeoptimization.compose.DerivedStatePage
 import com.example.composeoptimization.compose.ListPage
 import com.example.composeoptimization.compose.StabilityPage
+import com.example.composeoptimization.compose.TestPage
 
 /**
  * Author: lidongjie
@@ -53,6 +54,13 @@ sealed interface Page {
         @Composable
         override fun page() = ListPage()
     }
+
+    object Test : Page {
+        override val name: String = "Test"
+
+        @Composable
+        override fun page() = TestPage()
+    }
 }
 
 val PageList = listOf(
@@ -60,4 +68,5 @@ val PageList = listOf(
     Page.Stability,
     Page.DerivedState,
     Page.List,
+    Page.Test,
 )
