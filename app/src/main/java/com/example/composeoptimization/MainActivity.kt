@@ -83,7 +83,7 @@ private fun Home(
             .padding(16.dp)
     ) {
         LazyColumn(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-            this.items(items = PageList, key = { item -> item.name }) {
+            items(items = PageList, key = { item -> item.name }) {
                 Button(
                     onClick = { onItemClick(it) },
                     modifier = Modifier.fillMaxWidth()

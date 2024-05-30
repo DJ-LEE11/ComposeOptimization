@@ -36,9 +36,6 @@ fun LambdaModifierPage() {
     }
 }
 
-/**
- * 推迟阅读状态优化
- */
 @Composable
 private fun ImageAnim(offset: () -> IntOffset) {
     Image(

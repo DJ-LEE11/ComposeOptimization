@@ -1,6 +1,8 @@
 package com.example.composeoptimization.compose
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Checkbox
@@ -10,8 +12,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.example.composeoptimization.ui.theme.noClickShadowModifier
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 
@@ -24,56 +26,57 @@ import kotlinx.collections.immutable.toImmutableList
 
 @Composable
 fun StabilityPage() {
-    val contact by remember { mutableStateOf(Contact("qqqq", "111")) }
+    val user by remember { mutableStateOf(User("Tim", 20)) }
     var selected by remember { mutableStateOf(false) }
-
-    var contactList by remember {
-        mutableStateOf(listOf(Contact("aaa", "111"), Contact("bbb", "222")))
-    }
-    Column {
-        Checkbox(checked = selected, {
-            selected = it
-        })
-//        ContactLayout(contact)
-        Text(text = "点击我", Modifier.noClickShadowModifier {
-            contactList = listOf(Contact("aaa", "111"), Contact("bbb", "222"), Contact("ccc", "333"))
-        })
-//        ContactList(contactList)
-//        ContactListLambdaLayout({ contactList })
-        ContactImmutableList(contactList.toImmutableList())
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Checkbox(checked = selected, { selected = it })
+        UserLayout(user)
     }
 }
 
-class Contact(val name: String, val phone: String)
+@Composable
+private fun UserLayout(user: User) {
+    Text(text = "${user.name} , ${user.age}")
+}
+
+private class User(val name: String, var age: Int)
+
 
 @Composable
-fun ContactLayout(info: Contact) {
-    Text(text = "${info.name} , ${info.phone}")
+fun StabilityListPage() {
+    val userList by remember {
+        mutableStateOf(listOf(User("Tim", 20), User("Jack", 30)))
+    }
+    var selected by remember { mutableStateOf(false) }
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Checkbox(checked = selected, { selected = it })
+        UserListLayout(userList)
+//        UserImmutableList(userList.toImmutableList())
+    }
 }
 
 @Composable
-fun ContactList(infos: List<Contact>) {
+private fun UserListLayout(uses: List<User>) {
     LazyColumn {
-        this.items(items = infos, key = { item -> item.name }) {
-            Text(text = "${it.name} ${it.phone}")
+        items(items = uses, key = { item -> item.name }) {
+            Text(text = "${it.name} , ${it.age}")
         }
     }
 }
 
 @Composable
-fun ContactImmutableList(infos: ImmutableList<Contact>) {
+private fun UserImmutableList(uses: ImmutableList<User>) {
     LazyColumn {
-        this.items(items = infos, key = { item -> item.name }) {
-            Text(text = "${it.name} ${it.phone}")
-        }
-    }
-}
-
-@Composable
-fun ContactListLambdaLayout(infos: () -> List<Contact>) {
-    LazyColumn {
-        this.items(items = infos(), key = { item -> item.name }) {
-            Text(text = "${it.name} , ${it.phone}")
+        items(items = uses, key = { item -> item.name }) {
+            Text(text = "${it.name} , ${it.age}")
         }
     }
 }
