@@ -5,7 +5,7 @@ import com.example.composeoptimization.App
 import com.example.composeoptimization.compose.DeferReadingStatePage
 import com.example.composeoptimization.compose.DerivedStatePage
 import com.example.composeoptimization.compose.LambdaModifierPage
-import com.example.composeoptimization.compose.ListPage
+import com.example.composeoptimization.compose.BackwardsPage
 import com.example.composeoptimization.compose.StabilityPage
 import com.example.composeoptimization.compose.TestPage
 
@@ -56,11 +56,11 @@ sealed interface Page {
         override fun page() = DerivedStatePage()
     }
 
-    object List : Page {
-        override val name: String = "List"
+    object Backwards : Page {
+        override val name: String = "Backwards"
 
         @Composable
-        override fun page() = ListPage()
+        override fun page() = BackwardsPage()
     }
 
     object Test : Page {
@@ -76,6 +76,6 @@ val PageList = listOf(
     Page.LamdbaModifer,
     Page.Stability,
     Page.DerivedState,
-    Page.List,
+    Page.Backwards,
     Page.Test,
 )

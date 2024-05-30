@@ -32,7 +32,7 @@ fun LambdaModifierPage() {
     val offset by offsetAnimate()
     Box(modifier = Modifier.fillMaxSize()) {
         NiceGridUI()
-        ImageAnimLambda({ offset })
+        ImageAnim({ offset })
     }
 }
 
@@ -50,11 +50,6 @@ private fun ImageAnim(offset: () -> IntOffset) {
 }
 
 @Composable
-private fun NiceGridUI() {
-    Box(modifier = Modifier.fillMaxSize())
-}
-
-@Composable
 private fun offsetAnimate(): State<IntOffset> = rememberInfiniteTransition().animateValue(
     initialValue = IntOffset(0, 0), targetValue = IntOffset(200, 400), typeConverter = IntOffset.VectorConverter,
     animationSpec = infiniteRepeatable(
@@ -65,6 +60,11 @@ private fun offsetAnimate(): State<IntOffset> = rememberInfiniteTransition().ani
         ),
     ), label = ""
 )
+
+@Composable
+private fun NiceGridUI() {
+    Box(modifier = Modifier.fillMaxSize())
+}
 
 /**
  * lambda修饰符优化
