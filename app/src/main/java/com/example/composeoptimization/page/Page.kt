@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import com.example.composeoptimization.App
 import com.example.composeoptimization.compose.DeferReadingStatePage
 import com.example.composeoptimization.compose.DerivedStatePage
+import com.example.composeoptimization.compose.LambdaModifierPage
 import com.example.composeoptimization.compose.ListPage
 import com.example.composeoptimization.compose.StabilityPage
 import com.example.composeoptimization.compose.TestPage
@@ -32,6 +33,13 @@ sealed interface Page {
 
         @Composable
         override fun page() = DeferReadingStatePage()
+    }
+
+    object LamdbaModifer : Page {
+        override val name: String = "Lambda Modifier"
+
+        @Composable
+        override fun page() = LambdaModifierPage()
     }
 
     object Stability : Page {
@@ -65,6 +73,7 @@ sealed interface Page {
 
 val PageList = listOf(
     Page.DeferReadingState,
+    Page.LamdbaModifer,
     Page.Stability,
     Page.DerivedState,
     Page.List,
