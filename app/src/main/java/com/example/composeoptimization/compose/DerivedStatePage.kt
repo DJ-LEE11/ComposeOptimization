@@ -29,7 +29,7 @@ fun DerivedStatePage() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(modifier = Modifier.clickable { clickCount++ }, text = "Click me")
-        if (clickCount >= 3) {
+        if (clickCount >= 5) {
             Text(text = "You clicked a lot")
         }
     }
